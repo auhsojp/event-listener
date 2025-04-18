@@ -1,17 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>All Notifications</title>
-</head>
-<body>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('All Notifications') }}
+        </h2>
+    </x-slot>
 
-    <h2>All Notifications</h2>
-
-    <ul>
-        @foreach ($notifications as $notification)
-            <li>{{ $notification->data['message'] }}</li>
-        @endforeach
-    </ul>
-
-</body>
-</html>
+    <div>
+        <div>
+            <div>
+                <div>
+                    <ul>
+                        @foreach ($notifications as $notification)
+                            <li>
+                                {{ $notification->data['message'] }} 
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

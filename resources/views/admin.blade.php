@@ -1,21 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Page</title>
-</head>
-<body>
+<x-app-layout>
+    <x-slot name="header">
+        <h2>
+            {{ __('Admin Page') }}
+        </h2>
+    </x-slot>
 
-    <h2>Admin Page</h2>
-
-    <a href="{{ route('view') }}">
-        <button>View All Orders</button>
-    </a>
-
-    @foreach ($logs as $log)
+    <div>
         <div>
-            <p>{{ $log->message }}</p>
+            <div>
+                <div>
+                    <a href="{{ route('view') }}">View All Orders</a>    
+                </div>
+                @foreach ($logs as $log)
+                    <div>
+                        <p>{{$log->message}}</p>
+                    </div>
+                @endforeach
+            </div>
         </div>
-    @endforeach
-
-</body>
-</html>
+    </div>
+</x-app-layout>
