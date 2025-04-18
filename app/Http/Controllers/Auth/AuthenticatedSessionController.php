@@ -44,4 +44,16 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    public function redirectPath($user)
+    {
+        if ($user->role == 'admin')
+        {
+            return 'admin';
+        }
+        else if ($user->role == 'customer')
+        {
+            return 'customer';
+        }
+    }
 }

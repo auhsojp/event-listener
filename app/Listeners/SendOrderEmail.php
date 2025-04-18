@@ -3,18 +3,28 @@
 namespace App\Listeners;
 
 use App\Events\OrderPlaced;
+use App\Mail\OrderConfirmationEmail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
 class SendOrderEmail implements ShouldQueue
 {
-    use InteractsWithQueue;
-
-    public function handle(OrderPlaced $event)
+   /**
+     * Create the event listener.
+     */
+    public function __construct()
     {
-        Mail::raw('Your order has been placed!', function ($message) use ($event) {
-            $message->to('inalealtia15@gmail.com')->subject('Order Confirmation');
-        });
+        //
+    }
+
+    /**
+     * Handle the event.
+     */
+    public function handle(OrderPLaced $event): void
+    {
+        $order = $event->order;
+
+        Mail::to($order->user->email)->send(new OrderConfirmationEmail($order));
     }
 }

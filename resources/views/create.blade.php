@@ -1,18 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Order</title>
 </head>
 <body>
-<form method="post" action="{{ route('order.save')}}">
+
+    <h2>Add Order</h2>
+
+    <form method="POST" action="{{ route('customer.store') }}">
         @csrf
-        <label for="title">Item</label>
-        <input type="text" name="item" placeholder="Item">
-        <label for="body">Quantity</label>
-        <input type="text" name="quantity" placeholder="quantity">
-        <button type="submit">Add your Order</button>
+        
+        <div>
+            <label for="item">Item</label><br>
+            <input type="text" id="item" name="item">
+        </div>
+
+        <div>
+            <label for="quantity">Quantity</label><br>
+            <input type="number" id="quantity" name="quantity">
+        </div>
+
+        <div>
+            <button type="submit">Add Order</button>
+        </div>
     </form>
+
 </body>
 </html>

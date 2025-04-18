@@ -14,39 +14,26 @@ class OrderConfirmationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * Create a new message instance.
+     */
+
     public $order;
+     
     public function __construct(Order $order)
     {
         $this->order = $order;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: 'Order Confirmation Email',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
+        return $this->subject('You Have Placed an Order')
+                    ->view('emails.order')
+                    ->with([
+                        'item' => $this->order->item,
+                        'name' => $this->order->user->name,
+                        'quantity' => $this->order->quantity,
+                        'date' => $this->order->created_at,
+                    ]);
     }
 }
